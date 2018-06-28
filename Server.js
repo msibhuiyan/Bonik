@@ -16,7 +16,7 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/', function (req, res) {
   console.log('working');
-  res.send('Chatbot website')
+  res.send('index.html')
 })
 
 https.createServer(options, app).listen(3000);
