@@ -11,12 +11,12 @@ key: key,
 cert: cert,
 ca: ca
 };
-app.set('view engine', 'ejs')
+app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/', function (req, res) {
   console.log('working');
-  res.send('Chatbot website')
+  res.sendFile('index.html');
 })
 
 https.createServer(options, app).listen(3000);
