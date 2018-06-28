@@ -1,6 +1,6 @@
 # Thesis-Website
-Clone the Rpository
-cd to directory Thesis-Website
-open Terminal
-Run $npm install
-Follwing that Run $node Server.js
+Clone the Rpository <br>
+cd to directory Thesis-Website <br>
+open Terminal <br>
+Run $npm install <br>
+Follwing that Run $node Server.js <br>
