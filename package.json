@@ -1,0 +1,31 @@
+{
+  "name": "thesis-website",
+  "version": "1.0.0",
+  "description": "A Blockchain Empowered Chatbot",
+  "main": "Server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saif-lesnar/Thesis-Website.git"
+  },
+  "keywords": [
+    "Hyperledger",
+    "Fabric",
+    "Blockchain",
+    "Dialogflow",
+    "Transactional",
+    "Chatbot"
+  ],
+  "author": "Md Saiful Islam Bhuiyan, Abdur Razzak Rana",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/saif-lesnar/Thesis-Website/issues"
+  },
+  "homepage": "https://github.com/saif-lesnar/Thesis-Website#readme",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "^4.16.3"
+  }
+}
