@@ -13,6 +13,8 @@ var path = require('path');
 var util = require('util');
 var os = require('os');
 var qs = require('querystring');
+var bcrypt = require('bcrypt');
+const saltRounds = 10;
 //
 var fabric_client = new Fabric_Client();
 
@@ -64,8 +66,8 @@ module.exports.signup = function(request,res){
         tx_id = fabric_client.newTransactionID();
         console.log("Assigning transaction_id: ", tx_id._transaction_id);
 
-        // queryCar chaincode function - requires 1 argument, ex: args: ['CAR4'],
-        // queryAllCars chaincode function - requires no arguments , ex: args: [''],
+				var hash = bcrypt.hashSync(password, saltRounds);
+				console.log('password'+password+'hash'+hash);
         const request = {
             //targets : --- letting this default to the peers assigned to the channel
             chaincodeId: 'blockchainChatbot',
@@ -73,7 +75,7 @@ module.exports.signup = function(request,res){
             //args: ['']
             fcn: 'signup',
             //'a0123c'
-            args: [user_name, account_no, email, password],
+            args: [user_name, account_no, email, hash],
             chainId: 'mychannel',
             txId: tx_id
         };
@@ -164,39 +166,13 @@ module.exports.signup = function(request,res){
             console.error('Failed to order the transaction. Error code: ' + response.status);
         }
 
-//        var tupleID = request.body.tupleID;
-//        var evidenceID = request.body.evidenceID;
-//        var evidenceHash = request.body.evidenceHash;
-//        var userID = request.body.userID;
-//        var operation = request.body.operation;
-//        var timeStamp = request.body.timeStamp;
-//        var domain = request.body.domain;
+
         if(results && results[1] && results[1].event_status === 'VALID') {
             console.log('Successfully committed the change to the ledger by the peer');
 						console.log("Inserted into the collection");
             //if user succesfully signed up then user is redirected to his page.
             res.redirect("/userindex.html")
 
-            //res.setHeader('Content-Type', 'application/json');
-            //res.send(JSON.stringify({ "message": "Data successfully stored." }));
-
-            // Use connect method to connect to the server
-            // MongoClient.connect(url, function(err, db) {
-            //   console.log("Connected successfully to server");
-            //   var collection = db.collection('userEvidence');
-            //   // Insert some documents
-            //   collection.insertMany([
-            //     { username: userID, evidenceID: evidenceID }
-            //   ], function(err, result) {
-            //     console.log("Inserted into the collection");
-            //     res.setHeader('Content-Type', 'application/json');
-            //     res.send(JSON.stringify({ "evidenceID": evidenceID }));
-            //   });
-						//
-            //   db.close();
-            // });
-//            res.setHeader('Content-Type', 'application/json');
-//            res.send(JSON.stringify({ "evidenceID": evidenceID }));
         } else {
             console.log('Transaction failed to be committed to the ledger due to ::'+results[1].event_status);
         }

@@ -5,7 +5,8 @@ var path = require('path');
 var util = require('util');
 var os = require('os');
 var qs = require('querystring');
-
+var bcrypt = require('bcrypt');
+const saltRounds = 10;
 //
 var fabric_client = new Fabric_Client();
 
@@ -82,14 +83,13 @@ module.exports.login = function(request,res){
                 var obj = JSON.parse(data.toString());
                 console.log("password is  ", obj['password']);
                 var passwordVerification = obj['password'];
-                console.log(password);
-                if(passwordVerification == password){
+                if(bcrypt.compareSync(password, passwordVerification)){
                   res.redirect("/userindex.html");
-                }
-                else {
+                } else  {
                   console.log("provide correct password");
                   res.redirect("/");
                 }
+                
 								//var obj = JSON.parse(data.toString());
 								//console.log("Actors are  ", obj['actors']);
 								//console.log("Response is ", JSON.stringify(data));

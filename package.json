@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/saif-lesnar/Thesis-Website#readme",
   "dependencies": {
+    "bcrypt": "^3.0.0",
     "ejs": "^2.6.1",
     "express": "^4.16.3",
     "fabric-ca-client": "^1.0.2",
