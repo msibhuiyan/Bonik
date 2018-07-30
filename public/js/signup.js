@@ -38,7 +38,7 @@ module.exports.signup = function(request,res){
     var email = request.body.email;
     var password = request.body.user_pass;
 
-    console.log("Reading: user_name : " +user_name+ " account_no "+account_no+" email "+email+" password "+password);
+    //console.log("Reading: user_name : " +user_name+ " account_no "+account_no+" email "+email+" password "+password);
     // create the key value store as defined in the fabric-client/config/default.json 'key-value-store' setting
     Fabric_Client.newDefaultKeyValueStore({ path: store_path
     }).then((state_store) => {
@@ -77,7 +77,7 @@ module.exports.signup = function(request,res){
             chainId: 'mychannel',
             txId: tx_id
         };
-
+				//console.log(request);
         // send the query proposal to the peer
       return channel.sendTransactionProposal(request);
     }).then((results) => {

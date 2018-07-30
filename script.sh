@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker rm -f $(docker ps -aq); docker network prune;docker rmi dev-peer0.org1.example.com-blockchainchatbot-1.0-a8769b9b98a7b54117b001d4b32686ec285a431edc66b4c55adb4e7ffbfd3187;./startFabric.sh;node enrollAdmin.js;node registerUser.js
+docker rm -f $(docker ps -aq); docker network prune;docker rmi dev-peer0.org1.example.com-blockchainchatbot-1.0-1f9636c152c2fe2240240be65f04323d78e3af999d2acc7050594e354c6869c3;./startFabric.sh;node enrollAdmin.js;node registerUser.js

@@ -5,7 +5,8 @@ var key = fs.readFileSync('encryption/private.key');
 var cert = fs.readFileSync( 'encryption/primary.crt' );
 var ca = fs.readFileSync( 'encryption/intermediate.crt' );
 var https = require('https');
-var SignupJS = require("./public/js/signup.js")
+var SignupJS = require("./public/js/signup.js");
+var LoginJS =require ("./public/js/login.js");
 const bodyParser = require('body-parser');
 var options = {
 key: key,
@@ -20,9 +21,13 @@ app.get('/', function (req, res) {
   res.sendFile('index.html');
 })
 app.post('/signup',function(req, res){
-  console.log('hit post');
+  console.log('hit sign up');
   SignupJS.signup(req, res);
 
+})
+app.post('/login', function(req, res){
+  console.log('hit login');
+  LoginJS.login(req, res);
 })
 https.createServer(options, app).listen(3000);
 console.log('Server started!');
