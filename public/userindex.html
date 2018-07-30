@@ -1,22 +1,23 @@
 <!doctype html>
 
- <html class="no-js" lang=""> 
+ <html class="no-js" lang="">
     <head>
         <meta charset="utf-8">
-        
+
         <title></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="assets/css/bootstrap.min.css">
         <link rel="stylesheet" href="assets/css/style.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="js/chatbot.js"></script>
     </head>
     <body>
-        
+
         <div class='preloader'><div class='loaded'>&nbsp;</div></div>
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
-        
+
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
 
@@ -38,11 +39,11 @@
                             <div class="home-content">
 
                                 <h1>Transactional<br><br> Chatbot</h1>
-                                
+
                             </div>
-                            
+
                         </div>
-                        
+
                     </div>
                     <div class="chatbox">
                             <div class = "chatlogs">
@@ -52,7 +53,7 @@
                                 </div>
                                  <div class = "chat self">
                                     <div class = "user-photo"></div>
-                                    <p class = "chat-message"> fine </p>
+                                    <p class = "chat-message" id= "chat-message" </p>
                                 </div>
                                 <!-- <div class = "chat friend">
                                     <div class = "user-photo"></div>
@@ -99,19 +100,24 @@
                                     hbhbbbhjb </p>
                                 </div> -->
                             </div>
-                            <div class = "chat-form">
-                                <textarea></textarea>
+                            <form>
+                            <!--<div class = "chat-form"> -->
+                              <input class = "chat-form" placeholder="write something" id="message" name= "data" value ="">
+                              <input name="submit" type="hidden" value="Submit">
+                              <!--  <textarea></textarea>
                                 <button>Send</button>
-                            </div>
+
+                          </div> -->
+                            </form>
                         </div>
 
                 </div>
-            </div>  
+            </div>
         </header>
 
         <!-- Sections -->
-        
-    
+
+
     <footer class="copyright-footer">
         <div class="container">
             <div class="row">
@@ -121,8 +127,8 @@
                     </div>
                 </div>
             </div>
-        </div>      
+        </div>
     </footer>
-    
+
 </body>
 </html>

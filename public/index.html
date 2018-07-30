@@ -1,9 +1,9 @@
 <!doctype html>
 
- <html class="no-js" lang=""> 
+ <html class="no-js" lang="">
     <head>
         <meta charset="utf-8">
-        
+
         <title></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,11 +12,11 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     </head>
     <body>
-        
+
         <div class='preloader'><div class='loaded'>&nbsp;</div></div>
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
-        
+
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
 
@@ -31,16 +31,16 @@
                                             <a class="close" href="#">&times;</a>
                                             <div class="content">
                                             <!-- form will be passed with post method later-->
-                                                <form action="userindex.html" method="get">  
-                                                    Email:<input type="text" name="email_id"/><br/><br/>  
-                                                    Password:<input type="password" name="user_pass"/><br/><br/>  
+                                                <form action="login" method="post">
+                                                    Email:<input type="text" name="email_id"/><br/><br/>
+                                                    Password:<input type="password" name="user_pass"/><br/><br/>
                                                     <input type="submit" value="login"/>
                                                 </form>
                                             </div>
                                         </div>
                                     </div>
                         </li>
- 
+
                         <li>
                                     <a class="popup-button" href="#popup2">Sign Up</a>
                                     <div id="popup2" class="overlay">
@@ -49,13 +49,13 @@
                                             <a class="close" href="#">&times;</a>
                                             <div class="content">
                                             <!-- form will be passed with post method later-->
-                                                <form action="userindex.html" method="get"> 
+                                                <form action="signup" method="post">
                                                     User Name:<input type="text" name= "user_name" /><br><br>
-                                                    Account no: <input type="number" name= "account_no"/><br><br> 
-                                                    Email:<input type="text" name="email_id"/><br/><br/>  
-                                                    Password:<input type="password" name="user_pass"/><br/><br/>  
+                                                    Account no: <input type="text" name= "account_no"/><br><br>
+                                                    Email:<input type="text" name="email"/><br/><br/>
+                                                    Password:<input type="password" name="user_pass"/><br/><br/>
 
-                                                    <input type="submit" value="SignUp"/> 
+                                                    <input type="submit" value="SignUp"/>
                                                 </form>
                                             </div>
                                         </div>
@@ -77,21 +77,21 @@
                             <div class="home-content">
 
                                 <h1>Transactional<br><br> Chatbot</h1>
-                                
+
                             </div>
-                            
+
                         </div>
-                        
+
                     </div>
                     <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
                 </div>
-            </div>  
+            </div>
         </header>
 
         <!-- Sections -->
-        
-    
+
+
     <footer class="copyright-footer">
         <div class="container">
             <div class="row">
@@ -101,8 +101,8 @@
                     </div>
                 </div>
             </div>
-        </div>      
+        </div>
     </footer>
-    
+
 </body>
 </html>
