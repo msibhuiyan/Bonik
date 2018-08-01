@@ -5,7 +5,6 @@ var key = fs.readFileSync('encryption/private.key');
 var cert = fs.readFileSync( 'encryption/primary.crt' );
 var ca = fs.readFileSync( 'encryption/intermediate.crt' );
 var https = require('https');
-
 var SignupJS = require("./public/js/signup.js");
 var LoginJS =require ("./public/js/login.js");
 const bodyParser = require('body-parser');
@@ -22,14 +21,11 @@ app.get('/', function (req, res) {
   res.sendFile('index.html');
 })
 app.post('/signup',function(req, res){
-
   console.log('hit sign up');
   SignupJS.signup(req, res);
 
 })
-//app.post('/userindex',LoginJS.saif(req, res))
 app.post('/login', function(req, res){
-  console.log("printing from server.js"+req.body.account_no);
   console.log('hit login');
   LoginJS.login(req, res);
 })

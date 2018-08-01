@@ -24,15 +24,12 @@ init();
 function init() {
 	channel.addPeer(peer);
 }
-function saif(){
 
-  console.log("testing func saif from login");
-
-}
 module.exports.login = function(request,res){
     var account_no = request.body.account_no;
     var email = request.body.email_id;
     var password =  request.body.user_password;
+    console.log("Reading:" + password + 'email '+ email + 'account_no' +account_no);
     // create the key value store as defined in the fabric-client/config/default.json 'key-value-store' setting
     Fabric_Client.newDefaultKeyValueStore({ path: store_path
     }).then((state_store) => {
@@ -92,7 +89,7 @@ module.exports.login = function(request,res){
                   console.log("provide correct password");
                   res.redirect("/");
                 }
-
+                
 								//var obj = JSON.parse(data.toString());
 								//console.log("Actors are  ", obj['actors']);
 								//console.log("Response is ", JSON.stringify(data));
