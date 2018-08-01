@@ -39,7 +39,7 @@ module.exports.signup = function(request,res){
     var account_no = request.body.account_no;
     var email = request.body.email;
     var password = request.body.user_pass;
-
+		var money = '10000';
     //console.log("Reading: user_name : " +user_name+ " account_no "+account_no+" email "+email+" password "+password);
     // create the key value store as defined in the fabric-client/config/default.json 'key-value-store' setting
     Fabric_Client.newDefaultKeyValueStore({ path: store_path
@@ -75,7 +75,7 @@ module.exports.signup = function(request,res){
             //args: ['']
             fcn: 'signup',
             //'a0123c'
-            args: [user_name, account_no, email, hash],
+            args: [user_name, account_no, email, hash,money],
             chainId: 'mychannel',
             txId: tx_id
         };
