@@ -67,7 +67,6 @@ module.exports.signup = function(request,res){
         console.log("Assigning transaction_id: ", tx_id._transaction_id);
 
 				var hash = bcrypt.hashSync(password, saltRounds);
-				console.log('password'+password+'hash'+hash);
         const request = {
             //targets : --- letting this default to the peers assigned to the channel
             chaincodeId: 'blockchainChatbot',
