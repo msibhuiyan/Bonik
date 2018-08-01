@@ -5,29 +5,15 @@ $(function () {
         showUserText();
         e.preventDefault();
 
-        var uri = "https://api.dialogflow.com/v1/query?v=20150910";
-        data = {
-                 "contexts": [],
-                "lang": "en",
-                "query":query,
-                "sessionId": "123456",
-                "timezone": "Asis/Almaty"
-            }
         $.ajax({
-            type: 'POST',
-            json: true,
-            url: uri,
-            data:JSON.stringify(data),
-             beforeSend: function (xhr) {
-             xhr.setRequestHeader('Content-Type', 'application/json');
-             xhr.setRequestHeader('Authorization', 'Bearer 06739e5ce32444e4a8f636fed317eb2b');
-
-             },
+            type: 'post',
+            url: 'process.php',
+            //data: { userID : userID }
+            data: {submit:true, message:query},
             success: function (response) {
-                var obj = response["result"]["fulfillment"]["speech"];
-
+                var obj = JSON.parse(response);
                 var answerdiv = jQuery('<div/>', {
-                    html: obj.linkify()+'&nbsp;',
+                    html: obj.result.fulfillment.speech.linkify()+'&nbsp;',
                     'class': "rounded-div-bot",
                     tabindex:1
                 });
@@ -35,25 +21,6 @@ $(function () {
                 $(answerdiv).focus();
 
                 $("#message").focus();
-            },
-            error: function (jqXHR, exception) {
-                var msg = '';
-                if (jqXHR.status === 0) {
-                    msg = 'Not connect.\n Verify Network.';
-                } else if (jqXHR.status == 404) {
-                    msg = 'Requested page not found. [404]';
-                } else if (jqXHR.status == 500) {
-                    msg = 'Internal Server Error [500].';
-                } else if (exception === 'parsererror') {
-                    msg = 'Requested JSON parse failed.';
-                } else if (exception === 'timeout') {
-                    msg = 'Time out error.';
-                } else if (exception === 'abort') {
-                    msg = 'Ajax request aborted.';
-                } else {
-                    msg = 'Uncaught Error.\n' + jqXHR.responseText;
-                }
-                console.log(msg);
             }
         });
 
@@ -74,18 +41,18 @@ function showUserText(){
 if(!String.linkify) {
     String.prototype.linkify = function() {
 
-        // http://, https://, ftp://
-        var urlPattern = /\b(?:https?|ftp):\/\/[a-z0-9-+&@#\/%?=~_|!:,.;]*[a-z0-9-+&@#\/%=~_|]/gim;
+      // http://, https://, ftp://
+      var urlPattern = /\b(?:https?|ftp):\/\/[a-z0-9-+&@#\/%?=~_|!:,.;]*[a-z0-9-+&@#\/%=~_|]/gim;
 
-        // www. sans http:// or https://
-        var pseudoUrlPattern = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
+      // www. sans http:// or https://
+      var pseudoUrlPattern = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
 
-        // Email addresses
-        var emailAddressPattern = /[\w.]+@[a-zA-Z_-]+?(?:\.[a-zA-Z]{2,6})+/gim;
+      // Email addresses
+      var emailAddressPattern = /[\w.]+@[a-zA-Z_-]+?(?:\.[a-zA-Z]{2,6})+/gim;
 
-        return this
-            .replace(urlPattern, '<a target="_blank" href="$&">$&</a>')
-            .replace(pseudoUrlPattern, '$1<a target="_blank" href="http://$2">$2</a>')
-            .replace(emailAddressPattern, '<a href="mailto:$&">$&</a>');
-    };
+      return this
+          .replace(urlPattern, '<a target="_blank" href="$&">$&</a>')
+          .replace(pseudoUrlPattern, '$1<a target="_blank" href="http://$2">$2</a>')
+          .replace(emailAddressPattern, '<a href="mailto:$&">$&</a>');
+  };
 }
