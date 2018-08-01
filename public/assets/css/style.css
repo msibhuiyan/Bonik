@@ -12,19 +12,20 @@ Author URI: http://themeforest.net/user/XpeedStudio/portfolio
 
 .chatbox {
     width:500px;
-    min-width:390px; 
-    height:600px;
+    min-width:390px;
+    height:550px;
     background: #fff;
-    padding: 25px;
+    padding: 10px;
     margin:20px auto;
     box-shadow: 0 3px #ccc;
+
 }
 .chatlogs{
-    padding:10px;
+    padding:-10px;
     width:100%;
     height:450px ;
     background: #eee;
-    overflow-x: hidden;
+    /*overflow-x: hidden;*/
     overflow-y: scroll;
 }
 .chatlogs::-webkit-scrollbar{
@@ -107,6 +108,57 @@ Author URI: http://themeforest.net/user/XpeedStudio/portfolio
 
 
 
+/*chat box another one starts*/
+.topstrip{
+    width:99%;
+    overflow-y: scroll;
+    position:fixed;
+    top:0px;
+    height:50px;
+    background-color: black;
+    color:white;
+    text-align: right;
+    font-size: 16px;
+    font-family: Georgia;
+}
+.topbar{
+    display:block;
+    width:100%;
+    overflow-y: scroll;
+    position:fixed;
+    top:50px;
+    bottom:65px;
+}
+.rounded-div-bot{
+    display:block;
+    width:80%;
+    border-radius: 5px;
+    border:solid 1px black;
+    background-color: lightgreen;
+    float:right;
+    margin: 10px;
+    padding:5px;
+    min-height: 1em;
+}
+.rounded-div{
+    display:block;
+    width:80%;
+    border-radius: 5px;
+    margin: 10px;
+    padding:5px;
+    border:solid 1px black;
+    background-color: lightgray;
+    float:left;
+}
+.inputbox{
+    outline:none;
+    width:98%;
+    height:40px;
+    position:fixed;
+    bottom:25px;
+}
+
+/*Chat box another one end*/
 
 
 
