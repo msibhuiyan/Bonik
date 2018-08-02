@@ -2,6 +2,8 @@ $(function () {
 
     $('form').on('submit', function (e) {
         var query = $("#message").val();
+        var reciverUser = null;
+        var money= null;
         showUserText();
         e.preventDefault();
 
@@ -25,6 +27,10 @@ $(function () {
              },
             success: function (response) {
                 var obj = response["result"]["fulfillment"]["speech"];
+                reciverUser = response["result"]["contexts"][0]["parameters"]["NumberOne.original"];
+                money = response["result"]["contexts"][0]["parameters"]["Money.original"];
+                console.log("Reciver User: "+reciverUser);
+                console.log("Amount of money: "+ money);
 
                 var answerdiv = jQuery('<div/>', {
                     html: obj.linkify()+'&nbsp;',
