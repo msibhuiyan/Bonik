@@ -29,7 +29,7 @@ module.exports.login = function(request,res){
     var account_no = request.body.account_no;
     var email = request.body.email_id;
     var password =  request.body.user_password;
-    console.log("Reading:" + password + 'email '+ email + 'account_no' +account_no);
+    console.log("Reading:email "+ email + 'account_no' +account_no);
     // create the key value store as defined in the fabric-client/config/default.json 'key-value-store' setting
     Fabric_Client.newDefaultKeyValueStore({ path: store_path
     }).then((state_store) => {
@@ -70,11 +70,15 @@ module.exports.login = function(request,res){
     }).then((query_responses) => {
         console.log("Query has completed, checking results");
         // query_responses could have more than one  results if there multiple peers were used as targets
+				console.log(query_responses);
         if (query_responses && query_responses.length == 1) {
-            if (query_responses[0] instanceof Error) {
+					if(query_responses[0] == 0){
+						console.log("user is not in the chain");
+						res.redirect("/");
+					}
+          else  if (query_responses[0] instanceof Error) {
                 console.error("error from query = ", query_responses[0]);
-                console.log("user is not in the chain");
-                res.redirect("/");
+
             } else {
                 //console.log("Response is ", JSON.stringify(query_responses[0].toString()));
                 //console.log("Response is ", query_responses[0].toString());
@@ -89,7 +93,7 @@ module.exports.login = function(request,res){
                   console.log("provide correct password");
                   res.redirect("/");
                 }
-                
+
 								//var obj = JSON.parse(data.toString());
 								//console.log("Actors are  ", obj['actors']);
 								//console.log("Response is ", JSON.stringify(data));
