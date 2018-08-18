@@ -2,44 +2,32 @@ $(function () {
 
     $('form').on('submit', function (e) {
         var query = $("#message").val();
-        var reciverUser = null;
-        var money= null;
+
         showUserText();
         e.preventDefault();
+        var uri = "/validation"
 
-        var uri = "https://api.dialogflow.com/v1/query?v=20150910";
         data = {
-                 "contexts": [],
-                "lang": "en",
-                "query":query,
-                "sessionId": "123456",
-                "timezone": "Asis/Almaty"
+                "query":query
             }
         $.ajax({
             type: 'POST',
             json: true,
             url: uri,
-            data:JSON.stringify(data),
-             beforeSend: function (xhr) {
-             xhr.setRequestHeader('Content-Type', 'application/json');
-             xhr.setRequestHeader('Authorization', 'Bearer 06739e5ce32444e4a8f636fed317eb2b');
-
-             },
+            data:data,
             success: function (response) {
-                var obj = response["result"]["fulfillment"]["speech"];
-                reciverUser = response["result"]["contexts"][0]["parameters"]["NumberOne.original"];
-                money = response["result"]["contexts"][0]["parameters"]["Money.original"];
-                console.log("Reciver User: "+reciverUser);
-                console.log("Amount of money: "+ money);
+
+            //  console.log(response["chat"]);
+                var obj = response["chat"];
 
                 var answerdiv = jQuery('<div/>', {
                     html: obj.linkify()+'&nbsp;',
                     'class': "rounded-div-bot",
                     tabindex:1
                 });
+
                 $("#chat-text").append(answerdiv);
                 $(answerdiv).focus();
-
                 $("#message").focus();
             },
             error: function (jqXHR, exception) {
