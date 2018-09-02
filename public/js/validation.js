@@ -33,6 +33,10 @@ var reciverUser = null;
 var money = null;
 var  responseChat;
 var transactiondata;
+var startbalance;
+var endbalance;
+var starttransaction;
+var endtransaction;
 module.exports.callAPI = function(request , res){
 	var query= request.body.query;
 	//res.redirect("/transaction");
@@ -76,6 +80,10 @@ module.exports.callAPI = function(request , res){
 							 }
 							 	module.exports.validate(transactiondata, res)
 						 }else  if(data["result"]["parameters"]["Balance"] !=null){
+							 //Testing performance of quring balance
+								startbalnce = new Date().getTime();
+						 		console.log('Start time');
+								console.log(startbalance+ "ends ");
 								 module.exports.checkbalance(request, res);
 						}else {
 							responseChat={
@@ -475,6 +483,11 @@ module.exports.checkbalance = function(request, res){
                 var currentmoney = obj['Money']
 								//console.log("Response is ", JSON.stringify(data));
 								var obj = "Your account Balance is " +currentmoney;
+								//Checking performance of quering execution times
+								endbalance = new Date().getTime();
+								console.log("Checking balance Execution time");
+								console.log(endbalance - startbalance);
+
 								if(currentmoney != null){
 								console.log(obj);
 								responseChat={
