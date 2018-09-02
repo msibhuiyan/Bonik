@@ -17,12 +17,13 @@ key: key,
 cert: cert,
 ca: ca
 };
+app.set('views');
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/', function (req, res) {
   console.log('working');
-  res.sendFile('index.html');
+  res.render('index');
 })
 app.post('/signup',function(req, res){
   console.log('hit sign up');
@@ -44,6 +45,9 @@ app.post('/login', function(req, res){
 app.post('/validation', function(req, res){
   console.log('hit validation');
   ValidationJS.callAPI(req, res);
+});
+app.get('/logout', function(req, res){
+  res.redirect('/');
 })
 /*app.post('/checkmoney', function(req, res){
   console.log('hit check mon');
