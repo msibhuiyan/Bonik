@@ -233,6 +233,7 @@ module.exports.signup = function(request,res){
         if(results && results[1] && results[1].event_status === 'VALID') {
             console.log('Successfully committed the change to the ledger by the peer');
 						console.log("Inserted into the collection");
+						request.session.accno=request.body.account_no;
             //if user succesfully signed up then user is redirected to his page.
             res.render("userindex")
 

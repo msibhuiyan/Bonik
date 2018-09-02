@@ -8,6 +8,7 @@ var os = require('os');
 var qs = require('querystring');
 var bcrypt = require('bcrypt');
 var XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
+var session = require('express-session');
 //var TransactionJS = require('./public/js/transaction.js')
 const saltRounds = 10;
 //
@@ -38,9 +39,10 @@ var endbalance;
 var starttransaction;
 var endtransaction;
 module.exports.callAPI = function(request , res){
-	var query= request.body.query;
+	var query= request["query"];
+	var sender =request["sender"];
 	//res.redirect("/transaction");
-	console.log(query);
+	console.log('from inner method '+query+' data '+ sender);
 /*api calling from server side*/
 
 	var uri = "https://api.dialogflow.com/v1/query?v=20150910";
@@ -75,13 +77,14 @@ module.exports.callAPI = function(request , res){
 						 }
 						 if(money!=null && reciverUser!=null ){
 							 transactiondata={
+								 					"sender":sender,
 				                 "reciverUser": reciverUser,
 				                 "money": money,
 							 }
 							 	module.exports.validate(transactiondata, res)
 						 }else  if(data["result"]["parameters"]["Balance"] !=null){
 							 //Testing performance of quring balance
-								startbalnce = new Date().getTime();
+								//startbalnce = new Date().getTime();
 						 		console.log('Start time');
 								console.log(startbalance+ "ends ");
 								 module.exports.checkbalance(request, res);
@@ -111,10 +114,11 @@ module.exports.validate = function(request,res){
 
 	console.log("responding from validate");
 	reciverUser = request["reciverUser"];
+	var sender = request["sender"];
 	money =request["money"];
 	console.log(reciverUser+" & "+money);
 
-  var sender = 2013331018;
+
 
     // create the key value store as defined in the fabric-client/config/default.json 'key-value-store' setting
     Fabric_Client.newDefaultKeyValueStore({ path: store_path
@@ -171,6 +175,7 @@ module.exports.validate = function(request,res){
             }
          else {
 					 			transactiondata = {
+									"sender" : sender,
 									"reciverUser": reciverUser,
 									"money": money,
 								}
@@ -191,12 +196,12 @@ module.exports.validate = function(request,res){
 module.exports.transact = function(request,res){
 	console.log("hitting from transact");
 	reciverUser = request["reciverUser"];
+	var sender = request["sender"];
 	var stringmoney =request["money"];
 	var moneyint = parseInt(stringmoney);
 	money = moneyint.toString();
 	//console.log(reciverUser+" & "+money);
 
-  var sender = '2013331018';
 
     // create the key value store as defined in the fabric-client/config/default.json 'key-value-store' setting
     Fabric_Client.newDefaultKeyValueStore({ path: store_path
@@ -352,10 +357,10 @@ module.exports.transact = function(request,res){
 module.exports.check = function(request,res){
 	console.log("hitting from check ");
 	reciverUser = request["reciverUser"];
+	var sender = request["sender"];
 	money =request["money"];
-	console.log(reciverUser+" & "+money);
 
-	var sender = '2013331018';
+	console.log(reciverUser+" & "+money);
 
     // create the key value store as defined in the fabric-client/config/default.json 'key-value-store' setting
     Fabric_Client.newDefaultKeyValueStore({ path: store_path
@@ -407,6 +412,7 @@ module.exports.check = function(request,res){
 								//console.log("Response is ", JSON.stringify(data));
                 if(sendermoney >= money ){
 									transactiondata = {
+										"sender":sender,
 										"reciverUser" : reciverUser,
 										"money" : money,
 									}
@@ -432,7 +438,7 @@ module.exports.check = function(request,res){
 module.exports.checkbalance = function(request, res){
 
 
-	var sender = '2013331011';
+	var sender = request["sender"];
 
     // create the key value store as defined in the fabric-client/config/default.json 'key-value-store' setting
     Fabric_Client.newDefaultKeyValueStore({ path: store_path

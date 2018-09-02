@@ -88,7 +88,8 @@ module.exports.login = function(request,res){
                 console.log("password is  ", obj['password']);
                 var passwordVerification = obj['password'];
                 if(bcrypt.compareSync(password, passwordVerification)){
-                  res.render("userindex");
+									request.session.accno = request.body.account_no;
+									res.render("userindex");
                 } else  {
                   console.log("provide correct password");
                   res.redirect("/");
