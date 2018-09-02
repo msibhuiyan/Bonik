@@ -82,7 +82,7 @@ module.exports.signupcheck = function(request,res){
 	        if (query_responses && query_responses.length == 1) {
 	          if(query_responses[0] != 0){
 							console.log("user exist in the chain");
-							res.send(responseChat);
+							res.redirect('/');
 						}
 	          else  if (query_responses[0] instanceof Error) {
 	                console.error("error from query = ", query_responses[0]);
@@ -234,7 +234,7 @@ module.exports.signup = function(request,res){
             console.log('Successfully committed the change to the ledger by the peer');
 						console.log("Inserted into the collection");
             //if user succesfully signed up then user is redirected to his page.
-            res.redirect("/userindex.html")
+            res.render("userindex")
 
         } else {
             console.log('Transaction failed to be committed to the ledger due to ::'+results[1].event_status);
