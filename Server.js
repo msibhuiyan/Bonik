@@ -26,7 +26,7 @@ app.get('/', function (req, res) {
 })
 app.post('/signup',function(req, res){
   console.log('hit sign up');
-  SignupJS.signup(req, res);
+  SignupJS.signupcheck(req, res);
 
 })
 app.post('/login', function(req, res){
