@@ -50,7 +50,7 @@ module.exports.callAPI = function(request , res){
 					 "contexts": [],
 					"lang": "en",
 					"query":query,
-					"sessionId": "123456",
+					"sessionId": sender,
 					"timezone": "Asis/Almaty"
 			};
 
@@ -232,15 +232,25 @@ module.exports.transact = function(request,res){
         // createCar chaincode function - requires 5 args, ex: args: ['CAR12', 'Honda', 'Accord', 'Black', 'Tom'],
         // changeCarOwner chaincode function - requires 2 args , ex: args: ['CAR10', 'Barry'],
         // must send the proposal to endorsing peers
-        var request = {
+				if(sender == reciverUser){
+					responseChat={
+						"chat":"You cannot send money to your own account.",
+					 }
+					 console.log("hitting wheather sander == reciverUser");
+					 money = null;
+					 reciverUser= null;
+					 res.send(responseChat);
+				}
+				else{
+        	var request = {
             //targets: let default to the peer assigned to the client
-            chaincodeId: 'blockchainChatbot',
-            fcn: 'transactmoney',
-						args: [sender, reciverUser, money],
-            chainId: 'mychannel',
-            txId: tx_id
-        };
-
+            	chaincodeId: 'blockchainChatbot',
+            	fcn: 'transactmoney',
+							args: [sender, reciverUser, money],
+            	chainId: 'mychannel',
+            	txId: tx_id
+        	};
+				}
         // send the transaction proposal to the peers
         return channel.sendTransactionProposal(request);
     }).then((results) => {
