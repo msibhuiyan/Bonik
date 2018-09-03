@@ -70,9 +70,9 @@ Author URI: http://themeforest.net/user/XpeedStudio/portfolio
     display: flex;
     align-items: flex-start;
 }
-.chat-form textarea{
+.chat-form input{
     background: #fbfbfb;
-    width: 75%;
+    width: 197%;
     height: 50px;
     border:2px solid: #eee;
     border-radius: 3px;
@@ -83,7 +83,7 @@ Author URI: http://themeforest.net/user/XpeedStudio/portfolio
 }
 .chat-form textarea:focus{
     background: #fff;
-    
+
 }
 .chat-form button {
     background: #1ddecd;
@@ -1047,7 +1047,7 @@ input:-ms-input-placeholder {
 }
 
 .cd-timeline-img {
-    
+
     position: absolute;
     /*margin-top: 10px;*/
     top: 0;
@@ -1492,4 +1492,4 @@ input:-ms-input-placeholder {
 .scrollup:hover{
     color:#333;
     transform:scale(1.1);
-}	
+}
