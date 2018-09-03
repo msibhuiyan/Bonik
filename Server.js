@@ -64,12 +64,12 @@ app.post('/validation', function(req, res){
     "query": query,
     "sender": sender,
   }
-	
+
   ValidationJS.callAPI(callapi, res);
 });
 app.get('/userindex', function(req, res){
   if(req.session.accno) {
-    res.redirect('/userindex');
+    res.render('/userindex');
 	} else {
 		res.render('index');
 	}
