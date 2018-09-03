@@ -71,7 +71,7 @@ app.get('/userindex', function(req, res){
   if(req.session.accno) {
     res.render('/userindex');
 	} else {
-		res.render('index');
+		res.redirect('index');
 	}
 })
 app.get('/logout',function(req,res){
