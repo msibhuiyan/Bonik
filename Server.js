@@ -32,9 +32,9 @@ app.set('views');
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
-app.get('/', function (req, res) {
+app.all('/', function (req, res) {
   if(req.session.accno){
-    res.redirect('/userindex')
+    res.redirect('userindex')
   }else{
     res.render('index');
   }
@@ -68,10 +68,11 @@ app.post('/validation', function(req, res){
   ValidationJS.callAPI(callapi, res);
 });
 app.get('/userindex', function(req, res){
+  console.log("hello/user index")
   if(req.session.accno) {
-    res.render('/userindex');
+    res.render('./userindex');
 	} else {
-		res.redirect('index');
+		res.redirect('/');
 	}
 })
 app.get('/logout',function(req,res){
