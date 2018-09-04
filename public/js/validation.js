@@ -42,7 +42,7 @@ module.exports.callAPI = function(request , res){
 	var query= request["query"];
 	var sender =request["sender"];
 	//res.redirect("/transaction");
-	console.log('from inner method '+query+' data '+ sender);
+
 /*api calling from server side*/
 
 	var uri = "https://api.dialogflow.com/v1/query?v=20150910";
@@ -66,11 +66,20 @@ module.exports.callAPI = function(request , res){
 						 if(data["result"]["parameters"].length!= 0 ){
 							 if(data["result"]["parameters"]["NumberOne"]!=null){
 								 reciverUser = data["result"]["parameters"]["NumberOne"];
+								 var reciverUserInt = parseInt(reciverUser);
+								 reciverUser = reciverUserInt.toString();
+
+
+
+
+
 							 }
 
 							 if(data["result"]["parameters"]["Money"] !=null){
 								money = data["result"]["parameters"]["Money"];
 								 //console.log("Testing money : "+data["result"]["parameters"]["Money"])
+								 var moneyint = parseInt(money);
+								 money = moneyint.toString();
 							 }
 
 
@@ -195,11 +204,12 @@ module.exports.validate = function(request,res){
 
 module.exports.transact = function(request,res){
 	console.log("hitting from transact");
-	reciverUser = request["reciverUser"];
 	var sender = request["sender"];
-	var stringmoney =request["money"];
-	var moneyint = parseInt(stringmoney);
-	money = moneyint.toString();
+	reciverUser = request["reciverUser"];
+	money = request["money"];
+
+
+
 	//console.log(reciverUser+" & "+money);
 
 
