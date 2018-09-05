@@ -2,7 +2,3 @@ node_modules
 Readme.txt
 npm-debug.log
 hfc-key-store
-enrollAdmin.js
-invoke.js
-query.js
-registerUser.js
