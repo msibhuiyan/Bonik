@@ -49,7 +49,7 @@ var endtransaction;
 
 //for file read and output
 
-var send =2033331000;
+var send =2033331001;
 var i=0;
 startQuery();
 var fs = require('fs')
@@ -58,7 +58,7 @@ function startQuery(){
 	var queryd= []
 	var fs = require('fs'),
 	readline = require('readline'),
-	instream = fs.createReadStream('./checkbalance.txt'),
+	instream = fs.createReadStream('./balancetest.txt'),
 	outstream = new (require('stream'))(),
 	rl = readline.createInterface(instream, outstream);
 
@@ -68,11 +68,11 @@ function startQuery(){
 
 				// console.log(queryd[i], sender[i])
 				 var data={
-						"query":line,
+						//"query":line,
 						"sender":send.toString(),
 					}
 
-					module.exports.callAPI(data);
+					module.exports.checkbalance(data);
 
 			 send=send+1;
 
@@ -246,6 +246,13 @@ module.exports.checkbalance = function(request, res){
 										 // done
 										 }
 									 })
+									 fs.appendFile('./balancewriteonlytime.txt',timeval+'\n', function (err) {
+										 if (err) {
+											 console.log("error in file writing")
+											 } else {
+											 // done
+											 }
+										 })
 								 //res.send({"chat":obj});
 								 //logger.write(timeval)
 							 }

@@ -46,6 +46,7 @@ var endtransaction;
 var startime= []
 
 var send =2033331001;
+var money = 100;
 var i=0;
 startQuery();
 var fs = require('fs')
@@ -71,10 +72,15 @@ function startQuery(){
 		 //  console.log(line);
 		 for(i=0;i<sender.length;i++){
 			 var data={
-					"query":queryd[i],
+				 //for dialogflow
+					//"query":queryd[i],
+					//for normal user account start
+					"money":money.toString(),
+					"query":queryd[i].toString(),
+					//for normal user account end
 					"sender":sender[i].toString(),
 				}
-				module.exports.callAPI(data);
+				module.exports.validate(data);
 
 		 }
 			 console.log('done reading file.');
@@ -169,7 +175,11 @@ module.exports.validate = function(request,res){
 
 	console.log("responding from validate");
 	var starttransaction = new Date().getTime();
-	var reciverUser = request["reciverUser"];
+	//for dialogflow request
+	//var reciverUser = request["reciverUser"];
+	// for normal user account request
+	var reciverUser=request["query"];
+	//for normal user account request end
 	var sender = request["sender"];
 	var money =request["money"];
 	console.log(reciverUser+" & "+money);
@@ -427,6 +437,13 @@ module.exports.transact = function(request,res){
 								 // done
 								 }
 							 })
+							 fs.appendFile('./validationwriteonlywrite.txt',timeval+'\n', function (err) {
+  							 if (err) {
+  								 console.log("error in file writing")
+  								 } else {
+  								 // done
+  								 }
+  							 })
 						 //res.send(responseChat);
 						 //testing end
             //res.setHeader('Content-Type', 'application/json');
