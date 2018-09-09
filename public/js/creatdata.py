@@ -1,9 +1,9 @@
-def createdata():
+def createsignupdata():
 
     dp = []
 
-    for i in range(100):
-        dp.append(2033331000+i)
+    for i in range(300):
+        dp.append(2033331001+i)
 
 
     return dp
@@ -14,8 +14,8 @@ def createtransactdata():
     money = 100
     str1= ''
     k=0
-    for i in range(49):
-        str1= str(ar[i%2])+" "+ str(2033331000+k) + " to "+str(money)+" taka."
+    for i in range(150):
+        str1= str(2033331002+k)
         k=k+2
         #print(str1)
         dp.append(str1)
@@ -24,11 +24,9 @@ def createtransactdata():
 
 
 def createcheckbalancedata():
-    ar = ['send', 'transact']
     dp = []
-    money = 100
     str1= ''
-    for i in range(100):
+    for i in range(500):
         str1= "check balance"
         #print(str1)
         dp.append(str1)
@@ -37,9 +35,9 @@ def createcheckbalancedata():
 
 file1 = open("signuptest.txt", "w")
 file2= open("validationtest.txt", "w")
-file3= open("checkbalance.txt", "w")
+file3= open("balancetest.txt", "w")
 
-data1 = createdata()
+data1 = createsignupdata()
 data2= createtransactdata()
 data3 =createcheckbalancedata()
 #print(data)
