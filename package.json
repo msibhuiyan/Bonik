@@ -30,7 +30,7 @@
     "express": "^4.16.3",
     "express-session": "^1.15.6",
     "fabric-ca-client": "^1.0.2",
-    "fabric-client": "^1.0.2",
+    "fabric-client": "^1.2.0",
     "grpc": "^1.6.0",
     "querystring": "^0.2.0",
     "vex-js": "^4.0.1",
