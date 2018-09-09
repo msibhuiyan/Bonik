@@ -1,1 +1,1 @@
-python creatdata.py; node signupforperformance;node validationforperformance;node validationforbalance;
+python creatdata.py;node signupforperformance;node signupforperformance;node validationforperformance;node validationforbalance;
