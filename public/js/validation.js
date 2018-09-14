@@ -60,9 +60,9 @@ module.exports.callAPI = function(request , res){
              var result= xhttp.responseText;
 
 						 var data = JSON.parse(result);
-						 console.log("hitting from CallAPI");
+						 //console.log("hitting from CallAPI");
 						 var obj = data["result"]["fulfillment"]["speech"];
-						 console.log(obj);
+						 //console.log(obj);
 						 if(data["result"]["parameters"].length!= 0 ){
 							 if(data["result"]["parameters"]["NumberOne"]!=null){
 								 reciverUser = data["result"]["parameters"]["NumberOne"];
@@ -94,14 +94,14 @@ module.exports.callAPI = function(request , res){
 						 }else  if(data["result"]["parameters"]["Balance"] !=null){
 							 //Testing performance of quring balance
 								//startbalnce = new Date().getTime();
-						 		console.log('Start time');
-								console.log(startbalance+ "ends ");
+						 		//console.log('Start time');
+								//console.log(startbalance+ "ends ");
 								 module.exports.checkbalance(request, res);
 						}else {
 							responseChat={
 								"chat":obj,
 							 }
-							 console.log("Hits in the else");
+							 //console.log("Hits in the else");
 
 							 res.send(responseChat);
 						 }
@@ -121,11 +121,11 @@ module.exports.callAPI = function(request , res){
 }
 module.exports.validate = function(request,res){
 
-	console.log("responding from validate");
+	//console.log("responding from validate");
 	reciverUser = request["reciverUser"];
 	var sender = request["sender"];
 	money =request["money"];
-	console.log(reciverUser+" & "+money);
+	//console.log(reciverUser+" & "+money);
 
 
 
@@ -163,7 +163,7 @@ module.exports.validate = function(request,res){
             //'a0123c'
             args: [reciverUser]
         };
-        console.log(request);
+        //console.log(request);
         // send the query proposal to the peer
         return channel.queryByChaincode(request);
     }).then((query_responses) => {
@@ -203,7 +203,7 @@ module.exports.validate = function(request,res){
 
 
 module.exports.transact = function(request,res){
-	console.log("hitting from transact");
+	//console.log("hitting from transact");
 	var sender = request["sender"];
 	reciverUser = request["reciverUser"];
 	money = request["money"];
@@ -246,7 +246,7 @@ module.exports.transact = function(request,res){
 					responseChat={
 						"chat":"You cannot send money to your own account.",
 					 }
-					 console.log("hitting wheather sander == reciverUser");
+					 //console.log("hitting wheather sander == reciverUser");
 					 money = null;
 					 reciverUser= null;
 					 res.send(responseChat);
@@ -358,7 +358,7 @@ module.exports.transact = function(request,res){
 						responseChat={
 							"chat":"Your transaction is done",
 						 }
-						 console.log("Hits in the else");
+						 //console.log("Hits in the else");
 						 money = null;
 						 reciverUser= null;
 						 res.send(responseChat);
@@ -375,12 +375,12 @@ module.exports.transact = function(request,res){
 
 
 module.exports.check = function(request,res){
-	console.log("hitting from check ");
+	//console.log("hitting from check ");
 	reciverUser = request["reciverUser"];
 	var sender = request["sender"];
 	money =request["money"];
 
-	console.log(reciverUser+" & "+money);
+	//console.log(reciverUser+" & "+money);
 
     // create the key value store as defined in the fabric-client/config/default.json 'key-value-store' setting
     Fabric_Client.newDefaultKeyValueStore({ path: store_path
@@ -415,7 +415,7 @@ module.exports.check = function(request,res){
         };
 
         // send the query proposal to the peer
-				console.log(request);
+				//console.log(request);
         return channel.queryByChaincode(request);
     }).then((query_responses) => {
         console.log("Query has completed, checking results");
@@ -425,9 +425,9 @@ module.exports.check = function(request,res){
                 console.error("error from query = ", query_responses[0]);
             } else {
                 var data = query_responses[0];
-                console.log("Response is ", data.toString());
+                //console.log("Response is ", data.toString());
 								var obj = JSON.parse(data.toString());
-								console.log("money is  ", obj['Money']);
+								//console.log("money is  ", obj['Money']);
                 var sendermoney = obj['Money']
 								//console.log("Response is ", JSON.stringify(data));
                 if(sendermoney >= money ){
@@ -493,7 +493,7 @@ module.exports.checkbalance = function(request, res){
         };
 
         // send the query proposal to the peer
-				console.log(request);
+				//console.log(request);
         return channel.queryByChaincode(request);
     }).then((query_responses) => {
         console.log("Query has completed, checking results");
@@ -503,7 +503,7 @@ module.exports.checkbalance = function(request, res){
                 console.error("error from query = ", query_responses[0]);
             } else {
                 var data = query_responses[0];
-                console.log("Response is ", data.toString());
+                //console.log("Response is ", data.toString());
 								var obj = JSON.parse(data.toString());
 								//console.log("money is  ", obj['Money']);
                 var currentmoney = obj['Money']
@@ -511,15 +511,15 @@ module.exports.checkbalance = function(request, res){
 								var obj = "Your account Balance is " +currentmoney;
 								//Checking performance of quering execution times
 								endbalance = new Date().getTime();
-								console.log("Checking balance Execution time");
-								console.log(endbalance - startbalance);
+								//console.log("Checking balance Execution time");
+								//console.log(endbalance - startbalance);
 
 								if(currentmoney != null){
-								console.log(obj);
+								//console.log(obj);
 								responseChat={
 									"chat":obj,
 								 }
-								 console.log("Works in the check balanvce");
+								 //console.log("Works in the check balanvce");
 								 res.send({"chat":obj});
 							 }
             }

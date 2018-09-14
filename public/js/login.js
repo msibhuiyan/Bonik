@@ -83,13 +83,13 @@ module.exports.login = function(request,res){
                 //console.log("Response is ", JSON.stringify(query_responses[0].toString()));
                 //console.log("Response is ", query_responses[0].toString());
                 var data = query_responses[0];
-                console.log("Response is ", data.toString());
+                //console.log("Response is ", data.toString());
                 var obj = JSON.parse(data.toString());
                 console.log("password is  ", obj['password']);
                 var passwordVerification = obj['password'];
                 if(bcrypt.compareSync(password, passwordVerification)){
 									request.session.accno = request.body.account_no;
-									res.render("userindex");
+									res.redirect("/userindex");
                 } else  {
                   console.log("provide correct password");
                   res.redirect("/");

@@ -235,7 +235,7 @@ module.exports.signup = function(request,res){
 						console.log("Inserted into the collection");
 						request.session.accno=request.body.account_no;
             //if user succesfully signed up then user is redirected to his page.
-            res.render("userindex")
+            res.redirect("/userindex")
 
         } else {
             console.log('Transaction failed to be committed to the ledger due to ::'+results[1].event_status);
