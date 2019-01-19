@@ -13,7 +13,7 @@ var path = require('path');
 var util = require('util');
 var os = require('os');
 var qs = require('querystring');
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcryptjs');
 const saltRounds = 10;
 //
 var fabric_client = new Fabric_Client();
