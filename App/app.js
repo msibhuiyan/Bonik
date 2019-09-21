@@ -6,11 +6,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var fs = require('fs');
-var key = fs.readFileSync('encryption/private.key');
-var cert = fs.readFileSync( 'encryption/primary.crt' );
-var ca = fs.readFileSync( 'encryption/intermediate.crt' );
-var https = require('https');
+
 var SignupJS = require("./public/javascripts/signup.js");
 var LoginJS =require ("./public/javascripts/login.js");
 var ValidationJS =require ("./public/javascripts/validation.js");
@@ -27,11 +23,7 @@ app.use(session({
 
 
 const bodyParser = require('body-parser');
-var options = {
-key: key,
-cert: cert,
-ca: ca
-};
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -73,7 +65,6 @@ app.post('/login', function(req, res){
 })*/
 app.post('/validation', function(req, res){
   var query= req.body.query;
-  var sender = req.session.accno;
   var sender = req.session.accno;
   callapi = {
     "query": query,

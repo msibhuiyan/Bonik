@@ -234,7 +234,9 @@ module.exports.signup = async function(request,res){
         // changeCarOwner transaction - requires 2 args , ex: ('changeCarOwner', 'CAR10', 'Dave')
         await contract.submitTransaction('signup', user_name, account_no, email, password, money);
         console.log('bTransaction has been submitted');
-        res.redirect("/userindex")
+        request.session.accno=account_no;
+        res.redirect("/userindex");
+        
         // Disconnect from the gateway.
         await gateway.disconnect();
 

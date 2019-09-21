@@ -103,8 +103,12 @@ module.exports.login = async function(request,res){
         // queryCar transaction - requires 1 argument, ex: ('queryCar', 'CAR4')
         // queryAllCars transaction - requires no arguments, ex: ('queryAllCars')
         const result = await contract.evaluateTransaction('login', account_no);
+        console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>" + result);
         if(result){
+            request.session.accno=account_no;
             res.redirect("/userindex");
+        }else{
+            res.redirect("/");
         }
         var data  = JSON.parse(result);
         console.log("login Transaction has been evaluated, result is:"+ result.toString()+ " " + data["Money"]);
