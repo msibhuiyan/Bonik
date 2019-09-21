@@ -106,7 +106,8 @@ module.exports.login = async function(request,res){
         if(result){
             res.redirect("/userindex");
         }
-        console.log(`login Transaction has been evaluated, result is: ${result.toString()}`);
+        var data  = JSON.parse(result);
+        console.log("login Transaction has been evaluated, result is:"+ result.toString()+ " " + data["Money"]);
 
     } catch (error) {
         console.error(`aFailed to evaluate transaction: ${error}`);
