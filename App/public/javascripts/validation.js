@@ -239,7 +239,7 @@ module.exports.validate = async function(request,res){
         }
 
     } catch (error) {
-        console.error(`aFailed to evaluate transaction: ${error}`);
+        console.error(`validate Failed to evaluate transaction: ${error}`);
         process.exit(1);
     }
 
@@ -343,6 +343,7 @@ module.exports.transact = async function(request,res){
             await gateway.connect(ccp, { wallet, identity: 'user1', discovery: { enabled: false } });
             const network = await gateway.getNetwork('mychannel');
             const contract = network.getContract('blockchainChatbot');
+            console.log(sender, reciverUser, money);
             contract.submitTransaction('transactmoney', sender, reciverUser, money);
             console.log('bTransaction has been submitted');
             responseChat={
@@ -351,7 +352,7 @@ module.exports.transact = async function(request,res){
              money = null;
              reciverUser= null;
              res.send(responseChat);
-            await gateway.disconnect();
+            // await gateway.disconnect();
         } catch (error) {
             console.error(`Failed to submit transaction: ${error}`);
             process.exit(1);
@@ -556,16 +557,17 @@ module.exports.check = async function(request,res){
         // queryCar transaction - requires 1 argument, ex: ('queryCar', 'CAR4')
         // queryAllCars transaction - requires no arguments, ex: ('queryAllCars')
         const result = await contract.evaluateTransaction('checkmoney', sender);
-        console.log(`validate Transaction has been evaluated, result is: ${result.toString()}`);
+        console.log(`check validate Transaction has been evaluated, result is: ${result.toString()}`);
 
         if(result){
             debugger;
             // var data = query_responses[0];
             //console.log("Response is ", data.toString());
-                            var obj = JSON.parse(data.toString());
+                            var obj = JSON.parse(result.toString());
                             //console.log("money is  ", obj['Money']);
-            var sendermoney = result['Money']
+            var sendermoney = obj['Money']
                             //console.log("Response is ", JSON.stringify(data));
+                            console.log('>>>>>>>> sender money'+sendermoney+' >>>>>>>>> Money ' + money);
             if(sendermoney >= money ){
                                 transactiondata = {
                                     "sender":sender,
@@ -586,9 +588,10 @@ module.exports.check = async function(request,res){
         }else{
             console.log("Failed to query in chain in function check");
         }
+        await gateway.disconnect();
 
     } catch (error) {
-        console.error(`aFailed to evaluate transaction: ${error}`);
+        console.error(`check Failed to evaluate transaction: ${error}`);
         process.exit(1);
     }
 
@@ -701,7 +704,7 @@ module.exports.checkbalance =  async function(request, res){
         // queryCar transaction - requires 1 argument, ex: ('queryCar', 'CAR4')
         // queryAllCars transaction - requires no arguments, ex: ('queryAllCars')
         const result = await contract.evaluateTransaction('checkmoney', sender);
-        console.log(`validate Transaction has been evaluated, result is: ${result.toString()}`);
+        console.log(`check balance validate Transaction has been evaluated, result is: ${result.toString()}`);
 
         if(!result){
             console.log("user is not in the chain");
@@ -711,7 +714,9 @@ module.exports.checkbalance =  async function(request, res){
             reciverUser = null;
             res.send(responseChat);
         }else{
-            var currentmoney = result['Money']
+            var obj = JSON.parse(result.toString());
+
+            var currentmoney = obj['Money']
             //console.log("Response is ", JSON.stringify(data));
             var obj = "Your account Balance is " +currentmoney;
             //Checking performance of quering execution times
@@ -730,7 +735,7 @@ module.exports.checkbalance =  async function(request, res){
         }
 
     } catch (error) {
-        console.error(`aFailed to evaluate transaction: ${error}`);
+        console.error(`check balance Failed to evaluate transaction: ${error}`);
         process.exit(1);
     }
 }

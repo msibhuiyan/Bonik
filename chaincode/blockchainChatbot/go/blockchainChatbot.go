@@ -139,7 +139,7 @@ func (s *SmartContract) transactmoney(APIstub shim.ChaincodeStubInterface, args 
 	if len(args) != 3 {
 		return shim.Error("Incorrect number of arguments. Expecting 3")
 	}
-
+	fmt.Println("DEBUGGING >>>>> transactmoney >>> Arg0 %s  Arg1 %s Arg2 %s",args[0], args[1], args[2]);
 
 		user1id :=SignUp{}
 		user2id :=SignUp{}
@@ -158,7 +158,7 @@ func (s *SmartContract) transactmoney(APIstub shim.ChaincodeStubInterface, args 
 			user2idAsBytes, _ = json.Marshal(user2id)
 			APIstub.PutState(args[1], user2idAsBytes)
 		}else {
-			fmt.Println("Error money data")
+			fmt.Println("Error money data, %s", err)
 		}
 
 

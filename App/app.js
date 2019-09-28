@@ -6,6 +6,8 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var userIndexRouter = require('./routes/userindex');
+// var usersRouter = require('./routes/users');
 
 var SignupJS = require("./public/javascripts/signup.js");
 var LoginJS =require ("./public/javascripts/login.js");
