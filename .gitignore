@@ -2,3 +2,6 @@ node_modules
 Readme.txt
 npm-debug.log
 hfc-key-store
+caliper.log
+report.html
+
