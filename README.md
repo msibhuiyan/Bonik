@@ -10,7 +10,7 @@ If you have already downloaded please skip this section.<br>
 ## How to Run
 cd to fabric-samples/ <br>
 Clone the Rpository <br>
-https://github.com/saif-lesnar/Thesis-Website.git <br>
+https://github.com/BhuiyanSaif18/Thesis-Website.git <br>
 cd to directory Thesis-Website <br>
 Cut 'blockchainChatbot' folder and paste the folder to fabric-samples/chaincode/ <br>
 ## Deploy Network
